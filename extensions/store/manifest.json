@@ -1,0 +1,78 @@
+{
+  "manifest_version": 3,
+  "name": "Better Steam Store",
+  "version": "1.0.0",
+  "description": "Better similar games, a \"players also play\" row and a cleaner, compact layout for Steam store pages.",
+  "homepage_url": "https://similargames.to",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "scripts": [
+      "recommendations/background.js",
+      "also-play/background.js",
+      "clean-interface/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://store.steampowered.com/app/*"
+      ],
+      "js": [
+        "recommendations/hook.js",
+        "also-play/hook.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://store.steampowered.com/app/*"
+      ],
+      "js": [
+        "recommendations/content.js",
+        "also-play/content.js",
+        "clean-interface/features.js",
+        "clean-interface/edit.js",
+        "clean-interface/tour.js",
+        "clean-interface/content.js"
+      ],
+      "css": [
+        "recommendations/content.css",
+        "clean-interface/content.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://store.steampowered.com/*"
+      ],
+      "js": [
+        "recommendations/prefetch.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://similargames.to/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "better-steam-store@similargames.to",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "browsingActivity"
+        ]
+      }
+    }
+  }
+}

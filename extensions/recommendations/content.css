@@ -1,0 +1,74 @@
+.bsr-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  margin: 0 -2px;
+  padding: 0 10px 0 10px;
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: rgba(0, 0, 0, 0.9) 0 0 12px 0;
+  font-size: 13px;
+  font-family: "Motiva Sans", Arial, sans-serif;
+  color: #8f98a0;
+  user-select: none;
+}
+
+.bsr-label {
+  letter-spacing: 0.02em;
+}
+
+.bsr-votes {
+  display: flex;
+  gap: 4px;
+}
+
+.bsr-vote {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 30px;
+  height: 22px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #b8bcbf;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.bsr-vote svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+
+.bsr-count {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.bsr-count:empty {
+  display: none;
+}
+
+.bsr-vote:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.bsr-vote:focus-visible {
+  outline: 1px solid #66c0f4;
+}
+
+.bsr-vote.is-up {
+  background: rgba(102, 192, 244, 0.22);
+  color: #66c0f4;
+}
+
+.bsr-vote.is-down {
+  background: rgba(224, 90, 90, 0.22);
+  color: #e86a6a;
+}

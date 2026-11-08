@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "Better Steam Also Play",
+  "version": "1.0.0",
+  "description": "Adds a \"players also play\" row under \"More like this\" on Steam store pages.",
+  "homepage_url": "https://similargames.to",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://store.steampowered.com/app/*"
+      ],
+      "js": [
+        "hook.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://store.steampowered.com/app/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://store.steampowered.com/*"
+      ],
+      "js": [
+        "prefetch.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://similargames.to/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "better-steam-also-play@similargames.to",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "browsingActivity"
+        ]
+      }
+    }
+  }
+}
