@@ -39,6 +39,10 @@ def copy_tree(src, dst, skip):
 
 def referenced_files(manifest):
     files = list(manifest.get("icons", {}).values())
+    action = manifest.get("action", {})
+    files += [p for p in [action.get("default_popup")] if p] + list(action.get("default_icon", {}).values())
+    if "options_ui" in manifest:
+        files.append(manifest["options_ui"]["page"])
     background = manifest.get("background", {})
     if "service_worker" in background:
         files.append(background["service_worker"])

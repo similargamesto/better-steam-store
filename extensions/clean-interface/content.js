@@ -9,6 +9,7 @@
 
   let state = { settings: {}, setupDone: false };
   let loaded = false;
+  let moduleOn = true;
   let panel = null;
   let button = null;
   let editing = false;
@@ -119,7 +120,7 @@
   }
 
   function applyClasses() {
-    const active = (state.setupDone || !!panel) && !editing;
+    const active = moduleOn && (state.setupDone || !!panel) && !editing;
     const on = [];
     for (const feature of FEATURES) {
       const enabled = active && isOn(feature);
@@ -413,7 +414,7 @@
 
   let welcomed = false;
   function welcome() {
-    if (welcomed || !button || !loaded || state.setupDone) return;
+    if (welcomed || !button || !loaded || !moduleOn || state.setupDone) return;
     welcomed = true;
     if (typeof BSCI_TOUR === "undefined") {
       openPanel();
@@ -443,13 +444,29 @@
       if (panel) closePanel();
       else openPanel();
     });
+    if (!moduleOn) button.style.display = "none";
     hub.appendChild(button);
     welcome();
   }
 
-  chrome.storage.sync.get(KEY).then((stored) => {
+  function setModule(on) {
+    if (on === moduleOn) return;
+    moduleOn = on;
+    if (!on) closePanel();
+    if (button) button.style.display = on ? "" : "none";
+    applyClasses();
+    welcome();
+  }
+
+  function moduleFlag(value) {
+    return !(value && value.cleanInterface === false);
+  }
+
+  chrome.storage.sync.get([KEY, "bss"]).then((stored) => {
     const saved = stored[KEY];
     if (saved && typeof saved === "object") state = { settings: saved.settings || {}, setupDone: !!saved.setupDone };
+    moduleOn = moduleFlag(stored.bss);
+    if (button && !moduleOn) button.style.display = "none";
     loaded = true;
     applyClasses();
     welcome();
@@ -458,11 +475,27 @@
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
-    if (area !== "sync" || !changes[KEY] || !changes[KEY].newValue) return;
-    const next = changes[KEY].newValue;
+    if (area !== "sync") return;
+    if (changes.bss) setModule(moduleFlag(changes.bss.newValue));
+    if (!changes[KEY]) return;
+    const next = changes[KEY].newValue || { settings: {}, setupDone: true };
     state = { settings: next.settings || {}, setupDone: !!next.setupDone };
     applyClasses();
     refreshPanel();
+  });
+
+  chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+    if (!msg) return false;
+    if (msg.type === "bss-page") {
+      sendResponse({ clean: moduleOn });
+      return false;
+    }
+    if (msg.type === "bsci-edit") {
+      if (moduleOn) startEdit();
+      sendResponse(moduleOn);
+      return false;
+    }
+    return false;
   });
 
   function ready() {

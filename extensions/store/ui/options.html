@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Better Steam Store settings</title>
+  <link rel="icon" href="../icons/icon-32.png">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <img src="../icons/icon-48.png" width="40" height="40" alt="">
+      <div>
+        <div class="brand">Better Steam Store</div>
+        <div class="brand-sub">Settings</div>
+      </div>
+      <a class="topbar-link" href="https://similargames.to/" target="_blank" rel="noopener">similargames.to</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="nav" id="nav" aria-label="Sections"></nav>
+
+    <main class="content">
+      <section class="section" id="features">
+        <h2>Features</h2>
+        <p class="lead">Turn each part of the extension on or off. Changes to the game rows show after you reload the Steam page.</p>
+        <div class="card" id="modules"></div>
+      </section>
+
+      <section class="section" id="clean">
+        <div class="section-head">
+          <div>
+            <h2>Clean Interface</h2>
+            <p class="lead" id="clean-summary"></p>
+          </div>
+          <button class="btn btn-secondary" type="button" id="reset">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5a5.5 5.5 0 1 1-5.4 6.6.75.75 0 1 1 1.47-.3A4 4 0 1 0 5.2 4.6H7a.75.75 0 0 1 0 1.5H3.5a.75.75 0 0 1-.75-.75V1.85a.75.75 0 0 1 1.5 0v1.5A5.48 5.48 0 0 1 8 2.5z"/></svg>
+            <span>Reset to defaults</span>
+          </button>
+        </div>
+        <div class="tip">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3C4.4 3 1.7 5.4.6 7.6a.9.9 0 0 0 0 .8C1.7 10.6 4.4 13 8 13s6.3-2.4 7.4-4.6a.9.9 0 0 0 0-.8C14.3 5.4 11.6 3 8 3zm0 8.4A3.4 3.4 0 1 1 8 4.6a3.4 3.4 0 0 1 0 6.8zm0-5.3a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8z"/></svg>
+          <span>Quicker on the page itself: open any game on Steam, click <b>Clean Interface</b> next to Community Hub, then <b>Edit on page</b> and click the eye on what you want gone.</span>
+        </div>
+        <div class="off-note" id="clean-off" hidden>Clean Interface is off. Turn it on under Features to use these options.</div>
+        <div id="groups"></div>
+      </section>
+
+      <section class="section" id="about">
+        <h2>About</h2>
+        <div class="card about">
+          <p>Better Steam Store is made by <a href="https://similargames.to/" target="_blank" rel="noopener">SimilarGames.To</a>, where you can find games like the ones you love. Your settings are saved in your browser and sync with your account.</p>
+          <p class="muted" id="version"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Saved</div>
+
+  <script src="../clean-interface/features.js"></script>
+  <script src="modules.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Better Steam Store",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Better similar games, a \"players also play\" row and a cleaner, compact layout for Steam store pages.",
   "homepage_url": "https://similargames.to",
   "icons": {
@@ -9,6 +9,18 @@
     "32": "icons/icon-32.png",
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Better Steam Store",
+    "default_popup": "ui/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "options_ui": {
+    "page": "ui/options.html",
+    "open_in_tab": true
   },
   "background": {
     "service_worker": "background.js",

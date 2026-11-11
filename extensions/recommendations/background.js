@@ -75,7 +75,9 @@
       return true;
     }
     if (msg.type === "prefetch" && Number.isInteger(msg.appId)) {
-      load(msg.appId).then(() => sendResponse(true), () => sendResponse(false));
+      chrome.storage.sync.get("bss")
+        .then((s) => (s.bss && s.bss.recommendations === false ? false : load(msg.appId)))
+        .then(() => sendResponse(true), () => sendResponse(false));
       return true;
     }
     if (msg.type === "votes" && Number.isInteger(msg.page)) {

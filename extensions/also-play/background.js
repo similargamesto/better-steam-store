@@ -35,7 +35,9 @@
       return true;
     }
     if (msg.type === "prefetch") {
-      load(msg.appId).then(() => sendResponse(true), () => sendResponse(false));
+      chrome.storage.sync.get("bss")
+        .then((s) => (s.bss && s.bss.alsoPlay === false ? false : load(msg.appId)))
+        .then(() => sendResponse(true), () => sendResponse(false));
       return true;
     }
     return false;

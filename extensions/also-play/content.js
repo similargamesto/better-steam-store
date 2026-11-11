@@ -128,9 +128,16 @@
   }
 
   const cacheKey = "also:" + appId;
-  chrome.storage.local.get(cacheKey).then((stored) => {
-    const cached = stored[cacheKey];
-    if (cached && Date.now() - cached.t < CACHE_TTL_MS) settle(cached.v);
-    else askWorker();
-  }, askWorker);
+  function load() {
+    chrome.storage.local.get(cacheKey).then((stored) => {
+      const cached = stored[cacheKey];
+      if (cached && Date.now() - cached.t < CACHE_TTL_MS) settle(cached.v);
+      else askWorker();
+    }, askWorker);
+  }
+
+  chrome.storage.sync.get("bss").then((stored) => {
+    if (stored.bss && stored.bss.alsoPlay === false) settle(null);
+    else load();
+  }, load);
 })();

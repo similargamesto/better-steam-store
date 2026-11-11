@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Better Steam Store</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="head">
+    <img class="logo" src="../icons/icon-48.png" width="36" height="36" alt="">
+    <div class="head-text">
+      <div class="title">Better Steam Store</div>
+      <div class="sub" id="version"></div>
+    </div>
+    <a class="site" href="https://similargames.to/" target="_blank" rel="noopener" title="Open SimilarGames.To">similargames.to</a>
+  </header>
+
+  <main class="modules" id="modules"></main>
+
+  <div class="reload" id="reload" hidden>
+    <span>Reload the page to apply.</span>
+    <button class="btn btn-secondary btn-small" type="button" id="reload-btn">Reload</button>
+  </div>
+
+  <section class="actions">
+    <button class="btn btn-primary" type="button" id="edit">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3C4.4 3 1.7 5.4.6 7.6a.9.9 0 0 0 0 .8C1.7 10.6 4.4 13 8 13s6.3-2.4 7.4-4.6a.9.9 0 0 0 0-.8C14.3 5.4 11.6 3 8 3zm0 8.4A3.4 3.4 0 1 1 8 4.6a3.4 3.4 0 0 1 0 6.8zm0-5.3a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8z"/></svg>
+      <span>Edit this page</span>
+    </button>
+    <button class="btn btn-secondary" type="button" id="settings">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.4 1.2l.4 1.7c.4.2.8.4 1.1.6l1.7-.5 1.4 2.4-1.3 1.2a4.6 4.6 0 0 1 0 1.3l1.3 1.2-1.4 2.4-1.7-.5c-.3.3-.7.5-1.1.6l-.4 1.7H6.6l-.4-1.7c-.4-.2-.8-.4-1.1-.6l-1.7.5-1.4-2.4 1.3-1.2a4.6 4.6 0 0 1 0-1.3L2 5.4l1.4-2.4 1.7.5c.3-.3.7-.5 1.1-.6l.4-1.7h2.8zM8 5.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8z"/></svg>
+      <span>Settings</span>
+    </button>
+  </section>
+  <p class="hint" id="hint" hidden></p>
+
+  <script src="../clean-interface/features.js"></script>
+  <script src="modules.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
